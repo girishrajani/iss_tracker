@@ -22,6 +22,8 @@ class IssTracker extends StatefulWidget {
 class _IssTrackerState extends State<IssTracker> {
   Completer<GoogleMapController> _controller = Completer();
   Set<Marker> _markers = {};
+  var lat, long;
+  CameraPosition _camPos;
 
   @override
   Widget build(BuildContext context) {
@@ -78,13 +80,14 @@ class _IssTrackerState extends State<IssTracker> {
           ),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {},
-      //   backgroundColor: Colors.blue[900],
-      //   child: Icon(
-      //     CupertinoIcons.location,
-      //   ),
-      // ),
+      floatingActionButton: FloatingActionButton(
+        // onPressed: _track,
+        onPressed: () {},
+        backgroundColor: Colors.blue[900],
+        child: Icon(
+          CupertinoIcons.location,
+        ),
+      ),
       body: GoogleMap(
         markers: _markers,
         // mapType: MapType.hybrid,
@@ -108,8 +111,10 @@ class _IssTrackerState extends State<IssTracker> {
       var jsonResponse = convert.jsonDecode(response.body);
       var lati = jsonResponse['iss_position']['latitude'];
       var longi = jsonResponse['iss_position']['longitude'];
-      var lat = double.parse(lati);
-      var long = double.parse(longi);
+      lat = double.parse(lati);
+      long = double.parse(longi);
+      final GoogleMapController controller = await _controller.future;
+      controller.animateCamera(CameraUpdate.newCameraPosition(_camPos));
       setState(() {
         _markers.clear();
         _markers.add(
@@ -118,9 +123,18 @@ class _IssTrackerState extends State<IssTracker> {
             position: LatLng(lat, long),
           ),
         );
+        _camPos = CameraPosition(
+          target: LatLng(lat, long),
+          zoom: 2,
+        );
       });
     } else {
       print('Request failed with status: ${response.statusCode}.');
     }
   }
+
+  // Future<void> _track() async {
+  //   final GoogleMapController controller = await _controller.future;
+  //   controller.animateCamera(CameraUpdate.newCameraPosition(_camPos));
+  // }
 }
