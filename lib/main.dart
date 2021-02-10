@@ -59,13 +59,13 @@ class _IssTrackerState extends State<IssTracker> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue[900],
+        backgroundColor: Colors.indigoAccent,
         title: Text('ISS Tracker'),
         centerTitle: true,
         actions: [
           IconButton(
             icon: Icon(
-              Icons.refresh,
+              Icons.help_center_rounded,
               color: Colors.white,
             ),
             onPressed: () {},
@@ -86,7 +86,7 @@ class _IssTrackerState extends State<IssTracker> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _getIss,
-        backgroundColor: Colors.blue[900],
+        backgroundColor: Colors.indigoAccent,
         label: Text(
           'Find ISS',
         ),
