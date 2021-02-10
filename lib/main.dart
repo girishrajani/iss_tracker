@@ -20,7 +20,8 @@ class IssTracker extends StatefulWidget {
 }
 
 class _IssTrackerState extends State<IssTracker> {
-  Completer<GoogleMapController> _controller = Completer();
+  GoogleMapController _controller;
+  Marker marker;
   Set<Marker> _markers = {};
   var lat, long;
   CameraPosition _camPos;
@@ -35,7 +36,7 @@ class _IssTrackerState extends State<IssTracker> {
         actions: [
           IconButton(
             icon: Icon(
-              Icons.help_center_rounded,
+              Icons.refresh,
               color: Colors.white,
             ),
             onPressed: () {},
@@ -84,26 +85,32 @@ class _IssTrackerState extends State<IssTracker> {
         // onPressed: _track,
         onPressed: () {},
         backgroundColor: Colors.blue[900],
-        child: Icon(
-          CupertinoIcons.location,
+
+        child: Column(
+          children: [
+            Icon(
+              Icons.location_searching,
+            ),
+            Text(
+              'Find ISS',
+            ),
+          ],
         ),
       ),
       body: GoogleMap(
-        markers: _markers,
+        markers: Set.of((marker != null) ? [marker] : []),
+        onMapCreated: (GoogleMapController controller) {
+          _controller = controller;
+        },
         // mapType: MapType.hybrid,
         initialCameraPosition: CameraPosition(
           target: const LatLng(0, 0),
           zoom: 2,
         ),
-        onMapCreated: _getIss,
       ),
     );
   }
 
-  // Future<void> _goToTheLake() async {
-  //   final GoogleMapController controller = await _controller.future;
-  //   controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-  // }
   Future<void> _getIss(GoogleMapController controller) async {
     var url = "http://api.open-notify.org/iss-now.json";
     var response = await http.get(url);
@@ -113,28 +120,8 @@ class _IssTrackerState extends State<IssTracker> {
       var longi = jsonResponse['iss_position']['longitude'];
       lat = double.parse(lati);
       long = double.parse(longi);
-      final GoogleMapController controller = await _controller.future;
-      controller.animateCamera(CameraUpdate.newCameraPosition(_camPos));
-      setState(() {
-        _markers.clear();
-        _markers.add(
-          Marker(
-            markerId: MarkerId('Iss'),
-            position: LatLng(lat, long),
-          ),
-        );
-        _camPos = CameraPosition(
-          target: LatLng(lat, long),
-          zoom: 2,
-        );
-      });
     } else {
       print('Request failed with status: ${response.statusCode}.');
     }
   }
-
-  // Future<void> _track() async {
-  //   final GoogleMapController controller = await _controller.future;
-  //   controller.animateCamera(CameraUpdate.newCameraPosition(_camPos));
-  // }
 }
