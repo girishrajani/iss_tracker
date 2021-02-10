@@ -22,9 +22,38 @@ class IssTracker extends StatefulWidget {
 class _IssTrackerState extends State<IssTracker> {
   GoogleMapController _controller;
   Marker marker;
-  Set<Marker> _markers = {};
+  // Set<Marker> _markers = {};
   var lat, long;
-  CameraPosition _camPos;
+  // CameraPosition _camPos;
+
+  Future<void> _getIss() async {
+    var url = "http://api.open-notify.org/iss-now.json";
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      var jsonResponse = convert.jsonDecode(response.body);
+      var lati = jsonResponse['iss_position']['latitude'];
+      var longi = jsonResponse['iss_position']['longitude'];
+      lat = double.parse(lati);
+      long = double.parse(longi);
+      LatLng latlng = LatLng(lat, long);
+      _controller.animateCamera(CameraUpdate.newCameraPosition(
+          new CameraPosition(
+              bearing: 192.8334901395799,
+              target: latlng,
+              tilt: 0,
+              zoom: 18.00)));
+      this.setState(() {
+        marker = Marker(
+          markerId: MarkerId("home"),
+          position: latlng,
+          draggable: false,
+          zIndex: 2,
+          flat: true,
+          anchor: Offset(0.5, 0.5),
+        );
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +71,31 @@ class _IssTrackerState extends State<IssTracker> {
             onPressed: () {},
           )
         ],
+      ),
+      body: GoogleMap(
+        markers: Set.of((marker != null) ? [marker] : []),
+        onMapCreated: (GoogleMapController controller) {
+          _controller = controller;
+        },
+        // mapType: MapType.hybrid,
+        initialCameraPosition: CameraPosition(
+          target: const LatLng(0, 0),
+          zoom: 2,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _getIss,
+        backgroundColor: Colors.blue[900],
+        child: Row(
+          children: [
+            Icon(
+              Icons.location_searching,
+            ),
+            Text(
+              'Find ISS',
+            ),
+          ],
+        ),
       ),
       drawer: Drawer(
         child: Container(
@@ -81,47 +135,6 @@ class _IssTrackerState extends State<IssTracker> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        // onPressed: _track,
-        onPressed: () {},
-        backgroundColor: Colors.blue[900],
-
-        child: Column(
-          children: [
-            Icon(
-              Icons.location_searching,
-            ),
-            Text(
-              'Find ISS',
-            ),
-          ],
-        ),
-      ),
-      body: GoogleMap(
-        markers: Set.of((marker != null) ? [marker] : []),
-        onMapCreated: (GoogleMapController controller) {
-          _controller = controller;
-        },
-        // mapType: MapType.hybrid,
-        initialCameraPosition: CameraPosition(
-          target: const LatLng(0, 0),
-          zoom: 2,
-        ),
-      ),
     );
-  }
-
-  Future<void> _getIss(GoogleMapController controller) async {
-    var url = "http://api.open-notify.org/iss-now.json";
-    var response = await http.get(url);
-    if (response.statusCode == 200) {
-      var jsonResponse = convert.jsonDecode(response.body);
-      var lati = jsonResponse['iss_position']['latitude'];
-      var longi = jsonResponse['iss_position']['longitude'];
-      lat = double.parse(lati);
-      long = double.parse(longi);
-    } else {
-      print('Request failed with status: ${response.statusCode}.');
-    }
   }
 }
