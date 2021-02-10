@@ -94,12 +94,16 @@ class _IssTrackerState extends State<IssTracker> {
       ),
       drawer: Drawer(
         child: Container(
-          color: Colors.blue[900],
+          color: Colors.grey[900],
           child: ListView(
             children: <Widget>[
-              DrawerHeader(
-                child: Center(
-                  child: Text('ISS Tracker'),
+              Container(
+                color: Colors.blue[900],
+                child: DrawerHeader(
+                  child: Image(
+                    image: AssetImage('assets/iss.jpg'),
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
               ListTile(
