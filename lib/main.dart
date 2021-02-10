@@ -72,30 +72,25 @@ class _IssTrackerState extends State<IssTracker> {
           )
         ],
       ),
-      body: GoogleMap(
-        markers: Set.of((marker != null) ? [marker] : []),
-        onMapCreated: (GoogleMapController controller) {
-          _controller = controller;
-        },
-        // mapType: MapType.hybrid,
-        initialCameraPosition: CameraPosition(
-          target: const LatLng(0, 0),
-          zoom: 2,
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
+      // body: GoogleMap(
+      //   markers: Set.of((marker != null) ? [marker] : []),
+      //   onMapCreated: (GoogleMapController controller) {
+      //     _controller = controller;
+      //   },
+      //   // mapType: MapType.hybrid,
+      //   initialCameraPosition: CameraPosition(
+      //     target: const LatLng(0, 0),
+      //     zoom: 2,
+      //   ),
+      // ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: _getIss,
         backgroundColor: Colors.blue[900],
-        child: Row(
-          children: [
-            Icon(
-              Icons.location_searching,
-            ),
-            Text(
-              'Find ISS',
-            ),
-          ],
+        label: Text(
+          'Find ISS',
         ),
+        icon: Icon(Icons.location_searching),
       ),
       drawer: Drawer(
         child: Container(
