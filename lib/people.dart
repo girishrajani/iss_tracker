@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
-void main() {
-  runApp(People());
-}
-
 class People extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -25,7 +21,9 @@ class People extends StatelessWidget {
         body: GetData(),
         floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           backgroundColor: Colors.blue[900],
           child: Icon(
             Icons.navigate_before,
@@ -83,7 +81,7 @@ class _GetDataState extends State<GetData> {
               return Padding(
                 padding: EdgeInsets.all(10),
                 child: Card(
-                  color: Colors.tealAccent,
+                  color: Colors.blueAccent,
                   child: Center(
                     child: Padding(
                       padding: EdgeInsets.all(30),

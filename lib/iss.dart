@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:convert' as convert;
-import 'package:http/http.dart' as http;
+import 'package:iss_tracker/people.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -29,13 +28,24 @@ class _ISSState extends State<ISS> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               FloatingActionButton(
-                onPressed: () {},
+                heroTag: null,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                backgroundColor: Colors.blue[900],
                 child: Icon(
                   Icons.navigate_before,
                 ),
               ),
               FloatingActionButton(
-                onPressed: () {},
+                heroTag: null,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => People()),
+                  );
+                },
+                backgroundColor: Colors.blue[900],
                 child: Icon(
                   Icons.people,
                 ),
@@ -56,7 +66,7 @@ class _ISSState extends State<ISS> {
             Container(
               width: MediaQuery.of(context).size.width,
               child: Card(
-                color: Colors.tealAccent,
+                color: Colors.blueAccent,
                 child: ListTile(
                   title: Text(
                     'International Space Center',
@@ -69,19 +79,19 @@ class _ISSState extends State<ISS> {
             SizedBox(
               height: 10,
             ),
-            Container(
-              child: Card(
-                color: Colors.tealAccent,
-                child: ListTile(
-                  title: Text(
-                    'People on ISS',
-                    style: TextStyle(
-                      fontSize: 25,
-                    ),
-                  ),
-                ),
+            Image(
+              image: AssetImage(
+                'assets/iss2.jpg',
               ),
             ),
+            SizedBox(
+              height: 10,
+            ),
+            Image(
+              image: AssetImage(
+                'assets/iss1.jpg',
+              ),
+            )
           ],
         ),
       ),
