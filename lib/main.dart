@@ -92,48 +92,6 @@ class _IssTrackerState extends State<IssTracker> {
         ),
         icon: Icon(Icons.location_searching),
       ),
-      drawer: Drawer(
-        child: Container(
-          color: Colors.grey[900],
-          child: ListView(
-            children: <Widget>[
-              Container(
-                color: Colors.blue[900],
-                child: DrawerHeader(
-                  child: Image(
-                    image: AssetImage('assets/iss.jpg'),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-              ListTile(
-                onTap: () {},
-                leading: Icon(
-                  Icons.people,
-                  color: Colors.white,
-                ),
-                title: Text(
-                  'People on ISS',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              ListTile(
-                onTap: () {},
-                leading: Icon(
-                  Icons.exit_to_app,
-                  color: Colors.white,
-                ),
-                title: Text(
-                  'Exit',
-                  style: TextStyle(color: Colors.white),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
