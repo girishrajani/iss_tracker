@@ -37,21 +37,32 @@ class _ISSState extends State<ISS> {
             SizedBox(
               height: 20,
             ),
-            ListTile(
-              title: Text(
-                'International Space Center',
-                style: TextStyle(fontSize: 25),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: Card(
+                color: Colors.tealAccent,
+                child: ListTile(
+                  title: Text(
+                    'International Space Center',
+                    style: TextStyle(fontSize: 25),
+                  ),
+                  subtitle: Text(_issInfo),
+                ),
               ),
-              subtitle: Text(_issInfo),
             ),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
-            ListTile(
-              title: Text(
-                'People on ISS',
-                style: TextStyle(
-                  fontSize: 20,
+            Container(
+              child: Card(
+                color: Colors.tealAccent,
+                child: ListTile(
+                  title: Text(
+                    'People on ISS',
+                    style: TextStyle(
+                      fontSize: 25,
+                    ),
+                  ),
                 ),
               ),
             ),
