@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -37,11 +36,7 @@ class _IssTrackerState extends State<IssTracker> {
       long = double.parse(longi);
       LatLng latlng = LatLng(lat, long);
       _controller.animateCamera(CameraUpdate.newCameraPosition(
-          new CameraPosition(
-              bearing: 192.8334901395799,
-              target: latlng,
-              tilt: 0,
-              zoom: 18.00)));
+          new CameraPosition(bearing: 0, target: latlng, tilt: 0, zoom: 5.00)));
       this.setState(() {
         marker = Marker(
           markerId: MarkerId("home"),
@@ -72,17 +67,17 @@ class _IssTrackerState extends State<IssTracker> {
           )
         ],
       ),
-      // body: GoogleMap(
-      //   markers: Set.of((marker != null) ? [marker] : []),
-      //   onMapCreated: (GoogleMapController controller) {
-      //     _controller = controller;
-      //   },
-      //   // mapType: MapType.hybrid,
-      //   initialCameraPosition: CameraPosition(
-      //     target: const LatLng(0, 0),
-      //     zoom: 2,
-      //   ),
-      // ),
+      body: GoogleMap(
+        markers: Set.of((marker != null) ? [marker] : []),
+        onMapCreated: (GoogleMapController controller) {
+          _controller = controller;
+        },
+        mapType: MapType.satellite,
+        initialCameraPosition: CameraPosition(
+          target: const LatLng(0, 0),
+          zoom: 2,
+        ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _getIss,
