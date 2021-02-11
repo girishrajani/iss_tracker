@@ -28,7 +28,7 @@ class People extends StatelessWidget {
           onPressed: () {},
           backgroundColor: Colors.blue[900],
           child: Icon(
-            Icons.arrow_back,
+            Icons.navigate_before,
           ),
         ),
       ),

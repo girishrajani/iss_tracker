@@ -22,12 +22,25 @@ class _ISSState extends State<ISS> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.teal,
-        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: Colors.blue[900],
-          child: Icon(
-            Icons.arrow_back,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              FloatingActionButton(
+                onPressed: () {},
+                child: Icon(
+                  Icons.navigate_before,
+                ),
+              ),
+              FloatingActionButton(
+                onPressed: () {},
+                child: Icon(
+                  Icons.people,
+                ),
+              )
+            ],
           ),
         ),
         body: ListView(
