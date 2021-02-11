@@ -21,9 +21,7 @@ class IssTracker extends StatefulWidget {
 class _IssTrackerState extends State<IssTracker> {
   GoogleMapController _controller;
   Marker marker;
-  // Set<Marker> _markers = {};
   var lat, long;
-  // CameraPosition _camPos;
 
   Future<void> _getIss() async {
     var url = "http://api.open-notify.org/iss-now.json";
@@ -53,20 +51,6 @@ class _IssTrackerState extends State<IssTracker> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.indigoAccent,
-        title: Text('ISS Tracker'),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.help_center_rounded,
-              color: Colors.white,
-            ),
-            onPressed: () {},
-          )
-        ],
-      ),
       body: GoogleMap(
         markers: Set.of((marker != null) ? [marker] : []),
         onMapCreated: (GoogleMapController controller) {
