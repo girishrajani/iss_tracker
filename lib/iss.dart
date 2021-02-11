@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:convert' as convert;
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(MaterialApp(
@@ -14,6 +16,7 @@ class ISS extends StatefulWidget {
 class _ISSState extends State<ISS> {
   var _issInfo =
       'The International Space Station (ISS) is a multi-nation construction project that is the largest single structure humans ever put into space. Its main construction was completed between 1998 and 2011, although the station continually evolves to include new missions and experiments';
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -66,15 +69,9 @@ class _ISSState extends State<ISS> {
                 ),
               ),
             ),
-            // FutureBuilder(builder: ,)
           ],
         ),
       ),
     );
   }
-}
-
-class Data {
-  final String name;
-  Data(this.name);
 }
