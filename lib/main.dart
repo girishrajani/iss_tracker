@@ -21,7 +21,7 @@ class IssTracker extends StatefulWidget {
 class _IssTrackerState extends State<IssTracker> {
   GoogleMapController _controller;
   Marker marker;
-  var lat, long;
+  var lat, long, _snipp;
 
   Future<void> _getIss() async {
     var url = "http://api.open-notify.org/iss-now.json";
@@ -32,6 +32,7 @@ class _IssTrackerState extends State<IssTracker> {
       var longi = jsonResponse['iss_position']['longitude'];
       lat = double.parse(lati);
       long = double.parse(longi);
+      _snipp = lati + " " + longi;
       LatLng latlng = LatLng(lat, long);
       _controller.animateCamera(CameraUpdate.newCameraPosition(
           new CameraPosition(bearing: 0, target: latlng, tilt: 0, zoom: 5.00)));
@@ -40,6 +41,11 @@ class _IssTrackerState extends State<IssTracker> {
           markerId: MarkerId("home"),
           position: latlng,
           draggable: false,
+          infoWindow: InfoWindow(
+            title: 'International Space Center',
+            snippet: _snipp,
+            onTap: () {},
+          ),
           zIndex: 2,
           flat: true,
           anchor: Offset(0.5, 0.5),
@@ -56,6 +62,7 @@ class _IssTrackerState extends State<IssTracker> {
         onMapCreated: (GoogleMapController controller) {
           _controller = controller;
         },
+        zoomControlsEnabled: false,
         mapType: MapType.satellite,
         initialCameraPosition: CameraPosition(
           target: const LatLng(0, 0),
