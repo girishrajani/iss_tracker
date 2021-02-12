@@ -5,6 +5,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iss_tracker/iss.dart';
+import 'dart:typed_data';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(
@@ -24,7 +26,14 @@ class _IssTrackerState extends State<IssTracker> {
   Marker marker;
   var lat, long, _snipp;
 
+  Future<Uint8List> getMarker() async {
+    ByteData byteData =
+        await DefaultAssetBundle.of(context).load("assets/icon.png");
+    return byteData.buffer.asUint8List();
+  }
+
   Future<void> _getIss() async {
+    Uint8List imageData = await getMarker();
     var url = "http://api.open-notify.org/iss-now.json";
     var response = await http.get(url);
     if (response.statusCode == 200) {
@@ -40,6 +49,7 @@ class _IssTrackerState extends State<IssTracker> {
       this.setState(() {
         marker = Marker(
           markerId: MarkerId("home"),
+          icon: BitmapDescriptor.fromBytes(imageData),
           position: latlng,
           draggable: false,
           infoWindow: InfoWindow(
