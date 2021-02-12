@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:iss_tracker/iss.dart';
 
 void main() {
   runApp(
@@ -69,14 +70,32 @@ class _IssTrackerState extends State<IssTracker> {
           zoom: 2,
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _getIss,
-        backgroundColor: Colors.indigoAccent,
-        label: Text(
-          'Find ISS',
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            FloatingActionButton.extended(
+              heroTag: null,
+              onPressed: _getIss,
+              label: Text('Find ISS'),
+              backgroundColor: Colors.blue[900],
+              icon: Icon(Icons.location_searching),
+            ),
+            FloatingActionButton.extended(
+              heroTag: null,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ISS()),
+                );
+              },
+              backgroundColor: Colors.blue[900],
+              icon: Icon(CupertinoIcons.info),
+              label: Text('Info'),
+            ),
+          ],
         ),
-        icon: Icon(Icons.location_searching),
       ),
     );
   }
