@@ -7,13 +7,13 @@ class People extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.black,
         appBar: AppBar(
           backgroundColor: Colors.teal,
           title: Text(
             'People on ISS',
             style: TextStyle(
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
           centerTitle: true,
@@ -68,7 +68,7 @@ class _GetDataState extends State<GetData> {
                 height: 75,
                 width: 75,
                 child: CircularProgressIndicator(
-                  backgroundColor: Colors.tealAccent,
+                  backgroundColor: Colors.red,
                   strokeWidth: 7,
                 ),
               ),
@@ -81,14 +81,14 @@ class _GetDataState extends State<GetData> {
               return Padding(
                 padding: EdgeInsets.all(10),
                 child: Card(
-                  color: Colors.blueAccent,
+                  color: Colors.red,
                   child: Center(
                     child: Padding(
                       padding: EdgeInsets.all(30),
                       child: Text(
                         snapshot.data[index].name,
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.white,
                           fontSize: 25,
                         ),
                       ),

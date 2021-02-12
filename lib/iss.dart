@@ -66,13 +66,21 @@ class _ISSState extends State<ISS> {
             Container(
               width: MediaQuery.of(context).size.width,
               child: Card(
-                color: Colors.blueAccent,
+                color: Colors.red,
                 child: ListTile(
                   title: Text(
                     'International Space Center',
-                    style: TextStyle(fontSize: 25),
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.white,
+                    ),
                   ),
-                  subtitle: Text(_issInfo),
+                  subtitle: Text(
+                    _issInfo,
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
             ),
