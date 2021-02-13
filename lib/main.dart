@@ -54,7 +54,12 @@ class _IssTrackerState extends State<IssTracker> {
           infoWindow: InfoWindow(
             title: 'International Space Center',
             snippet: _snipp,
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ISS()),
+              );
+            },
           ),
           icon: BitmapDescriptor.fromBytes(imageData),
           zIndex: 2,
