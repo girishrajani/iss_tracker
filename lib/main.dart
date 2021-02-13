@@ -49,7 +49,6 @@ class _IssTrackerState extends State<IssTracker> {
       this.setState(() {
         marker = Marker(
           markerId: MarkerId("home"),
-          icon: BitmapDescriptor.fromBytes(imageData),
           position: latlng,
           draggable: false,
           infoWindow: InfoWindow(
@@ -57,6 +56,7 @@ class _IssTrackerState extends State<IssTracker> {
             snippet: _snipp,
             onTap: () {},
           ),
+          icon: BitmapDescriptor.fromBytes(imageData),
           zIndex: 2,
           flat: true,
           anchor: Offset(0.5, 0.5),
@@ -68,18 +68,18 @@ class _IssTrackerState extends State<IssTracker> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // body: GoogleMap(
-      //   markers: Set.of((marker != null) ? [marker] : []),
-      //   onMapCreated: (GoogleMapController controller) {
-      //     _controller = controller;
-      //   },
-      //   zoomControlsEnabled: false,
-      //   mapType: MapType.satellite,
-      //   initialCameraPosition: CameraPosition(
-      //     target: const LatLng(0, 0),
-      //     zoom: 2,
-      //   ),
-      // ),
+      body: GoogleMap(
+        markers: Set.of((marker != null) ? [marker] : []),
+        onMapCreated: (GoogleMapController controller) {
+          _controller = controller;
+        },
+        zoomControlsEnabled: false,
+        mapType: MapType.satellite,
+        initialCameraPosition: CameraPosition(
+          target: const LatLng(0, 0),
+          zoom: 2,
+        ),
+      ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
